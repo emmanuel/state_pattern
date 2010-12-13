@@ -7,9 +7,7 @@ module StatePattern
   end
 
   module ClassMethods
-    def initial_state_class
-      @initial_state_class
-    end
+    attr_reader :initial_state_class
 
     def set_initial_state(state_class)
       @initial_state_class = state_class
@@ -26,11 +24,11 @@ module StatePattern
   end
 
   def current_state_instance
-    set_state if @current_state_instance.nil?
+    set_state(self.class.initial_state_class) if @current_state_instance.nil?
     @current_state_instance
   end
 
-  def set_state(state_class = self.class.initial_state_class)
+  def set_state(state_class)
     return @current_state_instance if @current_state_instance.class == state_class
     @current_state_instance = state_class.new(self, @current_state_instance)
   end

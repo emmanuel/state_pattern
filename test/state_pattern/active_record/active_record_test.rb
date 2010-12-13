@@ -46,7 +46,7 @@ Expectations do
 
   expect "The button is off" do
     button = ARButton.create
-    button.state = "ARButton::On"
+    button.current_state = "ARButton::On"
     button.press
   end
 
@@ -57,7 +57,7 @@ Expectations do
   end
 
   expect "ARButton::On" do
-    ARButton.create(:state => "ARButton::On").state
+    ARButton.create(:current_state => "ARButton::On").state
   end
 
   expect nil do
