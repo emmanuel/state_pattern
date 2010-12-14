@@ -14,7 +14,6 @@ module StatePattern
     def initialize(stateful, previous_state)
       @stateful = stateful
       @previous_state = previous_state
-      enter
     end
 
     def state_name

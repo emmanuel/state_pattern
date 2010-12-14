@@ -24,7 +24,7 @@ module StatePattern
   end
 
   def current_state_instance
-    set_state(self.class.initial_state_class) if @current_state_instance.nil?
+    enter_state(self.class.initial_state_class) if @current_state_instance.nil?
     @current_state_instance
   end
 
@@ -33,9 +33,14 @@ module StatePattern
     @current_state_instance = state_class.new(self, @current_state_instance)
   end
 
+  def enter_state(next_state_class)
+    set_state(next_state_class)
+    current_state_instance.enter
+  end
+
   def transition_to(next_state_class)
     current_state_instance.exit
-    set_state(next_state_class)
+    enter_state(next_state_class)
   end
 end
 
