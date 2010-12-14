@@ -30,7 +30,7 @@ module StatePattern
     module StatePatternOverrides
       def set_state(state_class)
         super
-        write_attribute(self.class.state_attribute, @current_state_instance.class.name)
+        write_attribute(self.class.state_attribute, @current_state_instance.state_name)
       end
     end
 
