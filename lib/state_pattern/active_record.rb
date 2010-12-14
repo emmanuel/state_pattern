@@ -35,8 +35,13 @@ module StatePattern
     end
 
     def set_state_from_db
-      stored_value = send(self.class.state_attribute)
-      set_state(state_string_as_class(stored_value) || self.class.initial_state_class)
+      stored_state_class = state_string_as_class(send(self.class.state_attribute))
+
+      if stored_state_class
+        set_state(stored_state_class)
+      else
+        enter_state(self.class.initial_state_class)
+      end
     end
 
     def current_state=(new_state_string)
